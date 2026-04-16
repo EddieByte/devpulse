@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devpulse-ingress
+  namespace: default
+  annotations:
+    # AWS ALB Ingress Controller specifiers
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    
+    # Enable WebSocket upgrades and long polling configurations for SockJS
+    alb.ingress.kubernetes.io/load-balancer-attributes: routing.http.idle_timeout.seconds=3600
+    alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=86400
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: devpulse-service
+                port:
+                  number: 80
