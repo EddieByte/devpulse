@@ -1,5 +1,14 @@
 # DevPulse
 
+![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-e04326?style=flat-square&logo=jenkins&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Containerization-0db7ed?style=flat-square&logo=docker&logoColor=white)
+![AWS EKS](https://img.shields.io/badge/AWS-Elastic_Kubernetes-232F3E?style=flat-square&logo=amazon-aws&logoColor=white)
+![Java](https://img.shields.io/badge/Java_17-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)
+![React](https://img.shields.io/badge/React-20232a?style=flat-square&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-0db7ed?style=flat-square)
+
 **DevPulse** is a full-stack, real-time observability dashboard built with Spring Boot and React. It actively streams live JVM memory usage, system CPU metrics, thread counts, and uptime data dynamically via WebSockets (STOMP/SockJS) without requiring page refreshes.
 
 ## 💡 Simple Use Case (For Non-Technical Readers)
