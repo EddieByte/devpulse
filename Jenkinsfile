@@ -89,6 +89,39 @@ pipeline {
             }
         }
 
+        stage("Update Manifests") {
+            steps {
+                script {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'github',
+                        usernameVariable: 'GIT_USER',
+                        passwordVariable: 'GIT_PASS'
+                    )]) {
+                        sh """
+                            # Ensure a clean state by removing any existing directory
+                            rm -rf devpulse-manifests
+                            
+                            # Clone the manifest repository
+                            git clone https://github.com/EddieByte/devpulse-manifests.git
+                            cd devpulse-manifests/overlays/dev
+                            
+                            # Update the image tag in kustomization.yaml
+                            kustomize edit set image ${IMAGE_NAME}=${IMAGE_NAME}:${IMAGE_TAG}
+                            
+                            # Push changes back to the manifest repo
+                            git config user.email "jenkins@devpulse.com"
+                            git config user.name "Jenkins CI"
+                            git add kustomization.yaml
+                            git commit -m "Update dev image to ${IMAGE_TAG} [skip ci]"
+                            
+                            # Use credentials for the push
+                            git push https://\$GIT_USER:\$GIT_PASS@github.com/EddieByte/devpulse-manifests.git main
+                        """
+                    }
+                }
+            }
+        }
+
         stage('Cleanup Artifacts') {
             steps {
                 script {
