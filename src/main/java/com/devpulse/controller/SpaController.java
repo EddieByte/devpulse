@@ -8,6 +8,6 @@ public class SpaController {
 
     @RequestMapping(value = { "/", "/{path:[^\\.]*}" })
     public String forward() {
-        return "forward:/index.html";
+        return "redirect:/index.html";
     }
 }
